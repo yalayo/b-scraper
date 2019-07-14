@@ -6,6 +6,21 @@ Globals:
     EndpointConfiguration: REGIONAL
 
 Resources:
+  ScraperRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+        Effect: Allow
+        Principal:
+          Service:
+            - lambda.amazonaws.com
+        Version: '2012-10-17'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Type: AWS::IAM::Role
+
   BusqandoteScraperFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -15,3 +30,9 @@ Resources:
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 30
+      Role: !GetAtt ScraperRole.Arn
+      Events:
+        Testy:
+        Properties:
+          Schedule: rate(10 minutes)
+        Type: Schedule
