@@ -1,11 +1,13 @@
 package com.busqandote.scraper;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 
-public class AppointmentScraper implements RequestHandler<String, String> {
-    public String handleRequest(String input, Context context) {
-        context.getLogger().log("Input: " + input);
-        return "Hello World - " + input;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class AppointmentScraper implements RequestStreamHandler {
+    public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) {
+        context.getLogger().log("TESTING ");
     }
 }
