@@ -15,16 +15,3 @@ Resources:
       MemorySize: 512
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 30
-      Events:
-        GetResource:
-          Type: Api
-          Properties:
-            Path: /{proxy+}
-            Method: any
-
-Outputs:
-  BusqandoteScraperApi:
-    Description: URL for application
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
-    Export:
-      Name: BusqandoteScraperApi
