@@ -3,21 +3,6 @@ Transform: AWS::Serverless-2016-10-31
 Description: AWS Serverless Spring Boot 2 API - com.busqandote::busqandote-scraper
 
 Resources:
-  ScraperRole:
-    Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-        - Action:
-          - sts:AssumeRole
-        Effect: Allow
-        Principal:
-          Service:
-          - lambda.amazonaws.com
-        Version: '2012-10-17'
-      ManagedPolicyArns:
-      - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-    Type: AWS::IAM::Role
-
   BusqandoteScraperFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -32,3 +17,18 @@ Resources:
           Properties:
             Schedule: rate(10 minutes)
           Type: Schedule
+
+  ScraperRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+        Effect: Allow
+        Principal:
+          Service:
+            - lambda.amazonaws.com
+        Version: '2012-10-17'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Type: AWS::IAM::Role
