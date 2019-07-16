@@ -7,15 +7,15 @@ Resources:
     Properties:
       AssumeRolePolicyDocument:
         Statement:
-          - Action:
-              - sts:AssumeRole
+        - Action:
+          - sts:AssumeRole
         Effect: Allow
         Principal:
           Service:
-            - lambda.amazonaws.com
+          - lambda.amazonaws.com
         Version: '2012-10-17'
       ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
     Type: AWS::IAM::Role
 
   BusqandoteScraperFunction:
