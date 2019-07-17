@@ -18,6 +18,12 @@ import java.util.List;
 public class AppointmentScraper {
     private HttpClient httpClient;
 
+    public AppointmentScraper() {}
+
+    public AppointmentScraper(HttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
+
     public boolean check() {
         String url = "http://visas.migracion.gob.pa/SIVA/verif_citas";
 

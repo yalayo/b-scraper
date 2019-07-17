@@ -3,12 +3,15 @@ package com.busqandote;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.busqandote.scraper.AppointmentScraper;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.InputStream;
 import java.io.OutputStream;
 
 public class Application implements RequestStreamHandler {
-    private AppointmentScraper appointmentScraper = new AppointmentScraper();
+    private HttpClient httpClient = HttpClientBuilder.create().build();
+    private AppointmentScraper appointmentScraper = new AppointmentScraper(httpClient);
 
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) {
         boolean available = appointmentScraper.check();
