@@ -9,6 +9,7 @@ Resources:
       Handler: com.busqandote.Application::handleRequest
       Runtime: java8
       CodeUri: target/busqandote-scraper-1.0-SNAPSHOT-lambda-package.zip
+      Policies: AWSLambdaBasicExecutionRole
       MemorySize: 256
       Timeout: 30
       Role: !GetAtt ScraperRole.Arn
@@ -17,17 +18,3 @@ Resources:
           Properties:
             Schedule: rate(10 minutes)
           Type: Schedule
-
-  ScraperRole:
-    Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-          - Action:
-              - sts:AssumeRole
-        Effect: Allow
-        Principal:
-          Service:
-            - lambda.amazonaws.com
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-    Type: AWS::IAM::Role
