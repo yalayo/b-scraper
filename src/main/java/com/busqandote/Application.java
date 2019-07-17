@@ -11,6 +11,14 @@ public class Application implements RequestStreamHandler {
     private AppointmentScraper appointmentScraper = new AppointmentScraper();
 
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) {
-        context.getLogger().log("TESTING ");
+        boolean available = appointmentScraper.check();
+        context.getLogger().log(available ? "Website AVAILABLE" : "Website NOT-AVAILABLE");
+
+        if(available) {
+            String user = "-1001463900608";
+            String message = "ATENCION -> Sitio disponible para solicitar citas.";
+
+            appointmentScraper.send(message, user);
+        }
     }
 }
