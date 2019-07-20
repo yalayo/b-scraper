@@ -33,7 +33,7 @@ public class Application implements RequestStreamHandler {
     }
 
     private void init() {
-        int timeout = 5;
+        int timeout = 20;
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(timeout * 1000)
                 .setConnectionRequestTimeout(timeout * 1000)
