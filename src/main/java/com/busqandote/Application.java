@@ -4,7 +4,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.busqandote.scraper.AppointmentScraper;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
+import org.apache.http.config.SocketConfig;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 
@@ -34,20 +34,16 @@ public class Application implements RequestStreamHandler {
     }
 
     private void init() {
-        int timeout = 20;
-        RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(timeout * 1000)
-                .setConnectionRequestTimeout(timeout * 1000)
-                .setSocketTimeout(timeout * 1000).build();
-
         PoolingHttpClientConnectionManager connManager
                 = new PoolingHttpClientConnectionManager();
         connManager.setMaxTotal(5);
         connManager.setDefaultMaxPerRoute(4);
 
+        connManager.setDefaultSocketConfig(SocketConfig.custom().
+                setSoTimeout(20000).build());
+
 
         httpClient = HttpClientBuilder.create()
-                .setDefaultRequestConfig(config)
                 .setConnectionManager(connManager)
                 .build();
 
