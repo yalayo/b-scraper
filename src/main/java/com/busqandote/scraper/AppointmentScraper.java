@@ -59,10 +59,11 @@ public class AppointmentScraper {
                 System.out.println("The one: " + json);
                 return false;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } catch (URISyntaxException e) {
+        } //catch (ConnectionPoolTimeoutException pex) {
+            //this.send(message, user);
+        //}
+
+        catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             return false;
         }
