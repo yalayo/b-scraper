@@ -23,7 +23,7 @@ public class AppointmentScraper {
     }
 
     public boolean check() {
-        String url = "http://visas.migracion.gob.pa/SIVA/verif_citas";
+        String url = System.getenv("SCRAP_URL");
 
         try {
             Document document = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(100000).get();
